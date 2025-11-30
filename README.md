@@ -79,7 +79,7 @@ CIRRUS is implemented using modular helper functions for imputation, outlier det
 ---------------------------------------
 LICENSE
 ---------------------------------------
-(Insert your license here, e.g. MIT or Apache 2.0.)
+no
 
 ---------------------------------------
 CONTACT
