@@ -22,8 +22,7 @@ INSTALLATION
    cd CIRRUS
 
 2. Install dependencies (Python 3.11 recommended):
-   pip install -r requirements.txt
-
+   
 Required packages include:
 streamlit
 pandas
@@ -37,7 +36,7 @@ RUNNING THE APPLICATION
 ---------------------------------------
 Start the app locally:
 
-   streamlit run app.py
+   streamlit run eye-tracking-app2.py
 
 The application will open in your browser at:
    http://localhost:8501
