@@ -36,7 +36,7 @@ RUNNING THE APPLICATION
 ---------------------------------------
 Start the app locally:
 
-   streamlit run eye-tracking-app2.py
+   streamlit run eye_tracking_app2.py
 
 The application will open in your browser at:
    http://localhost:8501
