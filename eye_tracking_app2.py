@@ -34,13 +34,13 @@ def apply_normalization(norm_input, method):
         return (norm_input - mean_val) / std_val
 
     elif method == "RobustScaler":
+        med = np.quantile(norm_input, 0.50)
         q1 = np.quantile(norm_input, 0.25)
         q3 = np.quantile(norm_input, 0.75)
         denom = (q3 - q1)
         if denom == 0 or np.isnan(denom):
-            # Degenerate case: center on q1
-            return norm_input - q1
-        return (norm_input - q1) / denom
+            return norm_input - med
+        return (norm_input - med) / denom
 
     elif method == "MinMaxScaler":
         min_val = norm_input.min()
@@ -723,4 +723,5 @@ if uploaded_file:
 
             csv = final_data.to_csv(index=False).encode("utf-8")
             st.download_button("💾 Download Processed CSV", csv, file_name="processed_data.csv")
+
 
