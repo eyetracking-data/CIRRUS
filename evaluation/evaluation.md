@@ -82,3 +82,20 @@ The evaluation produces the following result files:
 * `cirrus_downstream_ml_comparison.csv`
 
 These files document the profiling results, recommendation behavior, controlled degradation tests, and downstream classification comparison.
+
+
+
+----
+
+### Evaluation
+
+To address the heuristic nature of the recommendation logic, we conducted a preliminary evaluation of CIRRUS on two heterogeneous eye-tracking datasets. The evaluation follows three goals: (RQ1) to test whether CIRRUS produces data-dependent recommendations for different quality profiles, (RQ2) to analyze whether the rule-based recommendations react systematically to controlled degradations, and (RQ3) to assess whether CIRRUS-recommended preprocessing remains competitive in downstream classification.
+
+First, we profiled all numerical features of the autism and academic reading datasets using the same indicators as in CIRRUS: missing-value rate, IQR-based outlier rate, skewness, and kurtosis. The autism dataset showed low corruption, with an average missing-value rate of 0.38%, whereas the academic reading dataset was substantially noisier, with an average missing-value rate of 32.43%. Accordingly, CIRRUS recommended simpler preprocessing pipelines for the low-noise dataset and more robust pipelines for the noisier behavioral dataset.
+
+Second, we performed controlled degradation experiments by injecting artificial missing values, outliers, and skewness into selected signals. The recommendation logic reacted consistently to these changes: increasing missingness shifted the recommended imputation strategy from LOCF or mean imputation toward KNN or MICE; increasing outlier contamination shifted the outlier strategy from Z-score/IQR-based methods toward Isolation Forest; and strong skewness led to robust outlier handling and robust scaling. This shows that the heuristic rules are not arbitrary defaults, but explicit and reproducible mappings from measurable data-quality indicators to preprocessing strategies.
+
+Third, we evaluated downstream classification on the academic reading dataset, where class labels were derived from the directory structure. We compared raw feature aggregation, a simple default pipeline, a robust default pipeline, and the CIRRUS-recommended pipeline using Random Forest classification with five-fold cross-validation. CIRRUS achieved the best accuracy and F1 score among the tested variants, while remaining competitive in AUC. These results do not imply that CIRRUS always identifies the globally optimal preprocessing pipeline, but they indicate that its recommendations provide a transparent and empirically useful alternative to arbitrary preprocessing defaults.
+
+The full evaluation notebook, generated result tables, and reproducibility material are provided in the accompanying GitHub repository.
+
